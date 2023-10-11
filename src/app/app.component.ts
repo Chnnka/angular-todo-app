@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishitem';
-
+import { EventService } from './../shared/services/EventService';
+import { WishService } from './wish.service';
 
 
 @Component({
@@ -8,12 +9,23 @@ import { WishItem } from 'src/shared/models/wishitem';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  items: WishItem[] = [
-    new WishItem('To Learn Angular'),
-    new WishItem('Get Coffee', true),
-    new WishItem('Find missing item'),
-  ];
+
+export class AppComponent implements OnInit {
+  items!: WishItem[];
+
+  constructor(events: EventService, private wishService: WishService) {
+    events.listen('removeWish', (wish: any) => {
+      //todo remove wish from items
+      let index = this.items.indexOf(wish);
+      this.items.splice(index, 1);
+    })
+  }
+
+  ngOnInit(): void {
+    this.wishService.getWishes().subscribe((data: any) => {
+      this.items = data;
+    })
+  }
 
   filter: any;
 
