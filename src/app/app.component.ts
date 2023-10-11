@@ -21,26 +21,12 @@ export class AppComponent {
   //set default as ALL items
   listFilter: any = '0';
 
-  newWishText = '';
+
 
   title = 'wishlist';
 
   get visibleItems(): WishItem[] {
     return this.items.filter(filters[this.listFilter]);
   };
-
-  //creating a new wish item
-  addNewWish() {
-    //todo:add wish item to array
-    this.items.push(new WishItem(this.newWishText));
-    //clear
-    this.newWishText = '';
-  }
-
-
-  toggleItem(item: WishItem) {
-    item.isComplete = !item.isComplete;
-    console.log(item);
-  }
-
+  
 }
