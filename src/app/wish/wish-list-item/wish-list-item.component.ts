@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishitem';
-import {EventService} from './../../shared/services/EventService';
+import { EventService } from '../../../shared/services/EventService';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class WishListItemComponent implements OnInit {
     return { 'strikeout text-muted': this.wish.isComplete };
   }
 
-  constructor(private events:EventService){}
+  constructor(private events: EventService) { }
 
   ngOnInit(): void {
 
